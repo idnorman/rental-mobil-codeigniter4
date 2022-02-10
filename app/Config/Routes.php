@@ -32,8 +32,34 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Home::web');
-$routes->get('/panel', 'Home::panel');
+$routes->get('/', 'Home::index');
+
+$routes->group('pelanggan', function ($routes) {
+    $routes->get('', 'Customer::index');
+    $routes->get('tambah', 'Customer::create');
+    $routes->post('store', 'Customer::store');
+    $routes->get('ubah/(:num)', 'Customer::edit/$1');
+    $routes->put('update', 'Customer::update');
+    $routes->delete('delete', 'Customer::delete');
+});
+
+$routes->group('mobil', function ($routes) {
+    $routes->get('', 'Car::index');
+    $routes->get('tambah', 'Car::create');
+    $routes->post('store', 'Car::store');
+    $routes->get('ubah/(:num)', 'Car::edit/$1');
+    $routes->put('update', 'Car::update');
+    $routes->delete('delete', 'Car::delete');
+});
+
+$routes->group('booking', function ($routes) {
+    $routes->get('', 'Booking::index');
+    $routes->get('tambah', 'Booking::create');
+    $routes->post('store', 'Booking::store');
+    $routes->get('ubah/(:num)', 'Booking::edit/$1');
+    $routes->put('update', 'Booking::update');
+    $routes->delete('delete', 'Booking::delete');
+});
 
 /*
  * --------------------------------------------------------------------
